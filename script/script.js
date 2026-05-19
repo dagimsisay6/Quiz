@@ -61,4 +61,27 @@ backBtn.style.display = currentQuestion === 0 ? "none" : "block";
 nextBtn.innerText = currentQuestion === quizData.length - 1 ? "Finish" : "Next";
 }
 
+nextBtn.addEventListener("click", () => {
+  const selected = document.querySelector(
+    'input[name="answer"]:checked'
+);
+
+  if (!selected) {
+    alert("Please select an answer");
+    return;
+}
+
+userAnswers[currentQuestion] =
+    Number(selected.value);
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  }
+});
+
+backBtn.addEventListener("click", () => {
+  currentQuestion--;
+  showQuestion();
+});
+
 showQuestion();
