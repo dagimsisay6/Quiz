@@ -76,6 +76,8 @@ userAnswers[currentQuestion] =
   if (currentQuestion < quizData.length - 1) {
     currentQuestion++;
     showQuestion();
+  } else {
+    showResult();
   }
 });
 
@@ -83,5 +85,22 @@ backBtn.addEventListener("click", () => {
   currentQuestion--;
   showQuestion();
 });
+
+function showResult() {
+  let score = 0;
+  quizData.forEach((question, index) => {
+    if (userAnswers[index] === question.correct) {
+      score++;
+    }
+});
+
+quizBox.innerHTML = `
+    <h1>Quiz Finished</h1>
+    <h2>Your Score: ${score}/${quizData.length}</h2>
+    <button onclick="location.reload()">
+      Restart Quiz
+    </button>
+  `;
+}
 
 showQuestion();
